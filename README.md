@@ -1,8 +1,8 @@
 # ClaudeCodePilot
 
-`ClaudeCodePilot` is a researched, Copilot-native, Claude-inspired customization pack for GitHub Copilot in VS Code. It uses the current native surface area only: custom agents, experimental subagents, prompt files, instructions, handoffs, and a small skills layer.
+`ClaudeCodePilot` is a researched, Copilot-native customization pack for GitHub Copilot in VS Code that aims to make Copilot behave more like Claude Code where that actually helps. It uses the current native customization surface only: custom agents, experimental subagents, prompt files, instructions, handoffs, and a small skills layer.
 
-This repo borrows the parts of Claude Code that transfer cleanly:
+The goal is not to copy Claude Code literally. The goal is to bring over the parts that improve real coding workflows inside Copilot:
 
 - specialized planner, builder, researcher, tester, and reviewer roles
 - explicit delegation rules for when isolated context helps
@@ -25,15 +25,38 @@ It intentionally does **not** try to recreate Claude Code's background workers, 
 - `scripts/validate_customizations.py`: no-dependency validator for agent, prompt, skill, and handoff wiring
 - `scripts/audit_tool_coverage.py`: fetches the latest official docs and checks whether new built-in tool sets need a deliberate decision
 
+## Quick start
+
+1. Load this repo into VS Code using the settings block from `python scripts/install.py`.
+2. Start with `/cc-plan` for larger or unclear tasks.
+3. Hand off to `cc-build` for implementation.
+4. Run `cc-review` before you trust the result.
+5. Use `/cc-brief` or `/compact` when the thread gets bloated.
+
+If you want one main entry point, use `cc-lead`. It is the closest thing in this pack to a Claude Code-style top-level coordinator.
+
 ## Recommended workflow
 
-1. Use `/cc-plan` or the `cc-plan` agent when the task is ambiguous or risky.
-2. Hand off to `cc-build` to implement with targeted research and validation helpers.
-3. Hand off to `cc-review` before declaring work complete.
-4. Use `/cc-audit`, `/cc-verify`, and `/cc-debug` when you want a structured audit, verification pass, or debugging loop.
-5. Use `/cc-brief` when a task has grown large and you want a compact handoff summary for a fresh session.
+1. Use `cc-lead` when you want a single orchestrating agent that can route work and keep the overall thread aligned.
+2. Use `/cc-plan` or the `cc-plan` agent when the task is ambiguous, risky, or likely to touch multiple files.
+3. Hand off to `cc-build` to implement with targeted research and validation helpers.
+4. Hand off to `cc-review` before declaring work complete.
+5. Use `/cc-audit`, `cc-research`, `cc-test`, `cc-verify`, and `cc-debug` when you want a structured audit, a focused research pass, or a debugging loop.
+6. Use `/cc-brief` when a task has grown large and you want a compact handoff summary for a fresh session.
 
 The practical operating guide is in [docs/session-workflow.md](docs/session-workflow.md).
+
+## What "Claude Code-like" means here
+
+This repo tries to reproduce the useful workflow shape of Claude Code inside Copilot:
+
+- a coordinator that explores before editing
+- role-specialized helpers instead of one overloaded assistant
+- explicit plan, build, and review phases
+- delegation only when it reduces context clutter
+- strong verification and findings-first review
+
+It does **not** try to mimic runtime features Copilot does not really have, such as durable background task workers, transcript-native resume semantics, or a full remote subagent execution model.
 
 ## Context and performance
 
@@ -79,6 +102,12 @@ The generated settings turn on the important pieces for this pack:
 - `github.copilot.chat.summarizeAgentConversationHistory.enabled`
 
 `browser` tools are included in several agents because they help with web verification, but they are optional. If the browser tool is unavailable, VS Code ignores it. If you want that capability, also enable `workbench.browser.enableChatTools`.
+
+After reloading VS Code, check that you can see:
+
+- agents: `cc-lead`, `cc-plan`, `cc-build`, `cc-review`
+- prompts: `/cc-plan`, `/cc-build`, `/cc-review`, `/cc-audit`, `/cc-brief`
+- skills available to agents: `cc-verify`, `cc-debug`
 
 ## Why the files are split this way
 
