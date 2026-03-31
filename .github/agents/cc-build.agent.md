@@ -2,7 +2,6 @@
 name: cc-build
 description: Implementation agent for making changes with focused research and validation helpers instead of over-delegating.
 argument-hint: "[task] [constraints] [files or area]"
-tools: ["agent", "search", "read", "edit", "execute"]
 agents: ["cc-research", "cc-test"]
 disable-model-invocation: true
 handoffs:
@@ -27,6 +26,7 @@ Follow [edit discipline](../instructions/edit-discipline.instructions.md), [orch
 - Make the code or configuration changes needed to complete the task.
 - Use subagents for isolated research or validation, not to offload ownership of the implementation.
 - Keep the main synthesis, tradeoff decisions, and final explanation in this thread.
+- Use the full currently available Copilot tool surface when implementation or verification needs it. This agent intentionally leaves `tools` unset so it tracks new built-in, extension, and MCP tools automatically.
 
 ## Delegation policy
 

@@ -5,6 +5,9 @@
   // Required for the skill layer.
   "chat.useAgentSkills": true,
 
+  // Keep the memory tool available. The built-in Plan agent uses session memory for its plan file.
+  "github.copilot.chat.tools.memory.enabled": true,
+
   // Keep long-running agent conversations from growing without bound.
   "github.copilot.chat.summarizeAgentConversationHistory.enabled": true,
 

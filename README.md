@@ -11,6 +11,8 @@ The goal is not to copy Claude Code literally. The goal is to bring over the par
 
 It intentionally does **not** try to recreate Claude Code's background workers, task mailboxes, transcript resume, or remote orchestration runtime. Copilot does not expose those same primitives today, so this pack stays inside what Copilot can actually do well.
 
+One important implementation choice: `cc-lead` and `cc-build` intentionally leave their `tools` frontmatter unset. In Copilot, that means they can use the currently available tool surface instead of a pinned list, so they track new built-in, extension, and MCP tools more naturally over time.
+
 ## What's inside
 
 - `.github/agents`: four user-facing agents and two hidden subagents
@@ -58,6 +60,8 @@ This repo tries to reproduce the useful workflow shape of Claude Code inside Cop
 
 It does **not** try to mimic runtime features Copilot does not really have, such as durable background task workers, transcript-native resume semantics, or a full remote subagent execution model.
 
+There is also no supported custom-agent frontmatter for "inherit the built-in Plan agent's exact tool config." When you specifically want the native Plan agent's evolving behavior, the best approach is to use the built-in Plan agent directly or ask `cc-lead` to use Plan as a subagent.
+
 ## Context and performance
 
 Copilot handles context differently from Claude Code, so this pack now leans into Copilot-native context hygiene instead of assuming a long-lived rich worker transcript.
@@ -66,6 +70,7 @@ The main rules:
 
 - use subagents for discovery and targeted validation so intermediate tool output stays out of the main thread
 - keep prompt files thin and let the agent own its tool budget
+- leave `cc-lead` and `cc-build` unpinned so they can see the live Copilot tool surface
 - split large work across plan, build, and review phases instead of forcing one giant session
 - use `/compact` when a thread gets noisy
 - use `/cc-brief` when you want a paste-ready handoff into a fresh session
@@ -98,6 +103,7 @@ The generated settings turn on the important pieces for this pack:
 - `chat.agentSkillsLocations`
 - `chat.customAgentInSubagent.enabled`
 - `chat.useAgentSkills`
+- `github.copilot.chat.tools.memory.enabled`
 - `chat.includeReferencedInstructions`
 - `github.copilot.chat.summarizeAgentConversationHistory.enabled`
 
@@ -145,7 +151,9 @@ Two things make the tool story safer over time.
 
 First, the agents mostly use broad top-level tool names such as `search`, `read`, `edit`, `execute`, `agent`, and `web`. That means if VS Code adds new subtools under an existing top-level tool set, the pack generally benefits automatically without any file changes here.
 
-Second, this repo includes a tool-audit script:
+Second, `cc-lead` and `cc-build` intentionally leave `tools` unset, so they can use whatever tools are currently available in Copilot rather than a frozen list.
+
+Third, this repo includes a tool-audit script:
 
 ```bash
 python scripts/audit_tool_coverage.py
@@ -161,6 +169,11 @@ It fetches the latest official VS Code and GitHub docs, then checks:
 That means if Copilot adds a **new top-level tool set**, we do not silently miss it. The audit fails until we explicitly decide whether to use it or intentionally omit it.
 
 There is also a scheduled GitHub Action at [.github/workflows/tool-audit.yml](.github/workflows/tool-audit.yml) so the repo can catch tool-surface drift weekly once it is pushed to GitHub.
+
+To verify the real tool surface in your own VS Code session:
+
+- type `#` in the chat input to see the currently available tools and tool sets
+- use the Agent Debug Log and Chat Debug views to inspect the exact tools and context that were sent to the model
 
 ## Research basis
 

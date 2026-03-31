@@ -69,6 +69,8 @@ def parse_frontmatter(path: Path) -> dict[str, Any]:
         key, value = line.split(":", 1)
         key = key.strip()
         value = value.strip()
+        if key in data:
+            fail(f"{path} has duplicate frontmatter key {key!r}")
         if value:
             data[key] = parse_scalar(value)
             i += 1
@@ -173,6 +175,20 @@ def validate_agent_relationships(agents: dict[str, dict[str, Any]]) -> None:
         if name in {"cc-lead", "cc-plan", "cc-build", "cc-review"}:
             if not isinstance(allowed_agents, list) or not allowed_agents:
                 fail(f"{path} should define an explicit non-empty agents allow-list")
+        if isinstance(allowed_agents, list):
+            tools = meta.get("tools")
+            if tools is not None:
+                if tools == "*":
+                    tool_values = ["*"]
+                elif isinstance(tools, str):
+                    tool_values = [tools]
+                else:
+                    tool_values = tools
+                if "*" not in tool_values and "agent" not in tool_values:
+                    fail(
+                        f"{path} defines subagents but does not expose the agent tool. "
+                        "Either include `agent` in tools or omit tools to allow all available tools."
+                    )
         if isinstance(allowed_agents, list):
             for allowed in allowed_agents:
                 if allowed not in agents:

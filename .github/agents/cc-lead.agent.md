@@ -2,8 +2,6 @@
 name: cc-lead
 description: Claude-inspired lead agent for coordinating planning, implementation, and review with focused subagents.
 argument-hint: "[goal] [constraints] [relevant files or stack]"
-tools: ["agent", "search", "read", "edit", "execute", "web", "todo", "browser"]
-tools: ["agent", "search", "read", "web"]
 agents: ["cc-research", "cc-test"]
 disable-model-invocation: true
 handoffs:
@@ -32,6 +30,7 @@ Follow [orchestration discipline](../instructions/orchestration.instructions.md)
 - Own the overall task shape and final user-facing synthesis.
 - Decide when work should stay in the main thread versus be delegated to a focused subagent.
 - Keep the conversation moving through the most useful phase: plan, build, or review.
+- Use the full currently available Copilot tool surface when it materially helps. This agent intentionally leaves `tools` unset so new built-in, extension, and MCP tools remain available without updating this file.
 
 ## When to delegate
 
@@ -62,6 +61,7 @@ Avoid vague prompts like "look into this" or "figure out the bug."
 - Prefer `cc-build` for implementation.
 - Prefer `cc-review` before declaring completion on non-trivial work.
 - Use `cc-research` and `cc-test` as helpers, not replacements for ownership.
+- If you want the platform-native planning behavior or newest plan-specific capabilities, explicitly ask a subagent to use the built-in Plan agent instead of trying to imitate it yourself.
 
 ## Context discipline
 

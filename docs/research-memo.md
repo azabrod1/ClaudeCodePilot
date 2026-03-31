@@ -94,6 +94,19 @@ Implementation:
 - Read-heavy agents can search, read, inspect command output, and use web tools when available.
 - Editing authority remains concentrated in `cc-build` and `cc-lead`.
 
+### 4a. Leave `tools` unset on the main coordinator and implementation agents
+
+Reason:
+
+- GitHub's custom-agent configuration docs state that if no `tools` are specified, all available tools are enabled.
+- That is the closest supported equivalent to "inherit whatever the current Copilot implementation exposes."
+- It is more future-proof than pinning a fixed tool list for the agents that need the broadest capability anyway.
+
+Implementation:
+
+- `cc-lead` and `cc-build` intentionally omit `tools`.
+- Read-only specialist agents still use explicit tool lists so their role stays narrower and more predictable.
+
 ### 5. Keep prompts lean and move reusable behavior into instructions and skills
 
 Reason:
@@ -131,6 +144,19 @@ Implementation:
 - `cc-plan` hands off to `cc-build`
 - `cc-build` hands off to `cc-review`
 - `cc-review` hands back to `cc-build` or `cc-plan`
+
+### 6a. Prefer the built-in Plan agent when you want native planning behavior
+
+Reason:
+
+- VS Code's built-in Plan agent has platform-native behavior such as a session `plan.md` memory file.
+- VS Code also exposes a `github.copilot.chat.planAgent.additionalTools` setting for the built-in Plan agent specifically.
+- A custom planning agent can imitate the workflow shape, but it does not automatically inherit those built-in Plan-specific behaviors.
+
+Implementation:
+
+- `cc-plan` stays as the Claude-style planner.
+- The docs now recommend using the built-in Plan agent directly, or via `cc-lead`, when exact native Plan behavior matters more than stylistic consistency.
 
 ### 7. Treat main-thread context as lossy over time
 

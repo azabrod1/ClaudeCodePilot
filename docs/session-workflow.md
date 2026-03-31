@@ -28,6 +28,8 @@ Good prompt:
 /cc-plan Add audit logging to user-role changes. Reuse existing logging patterns, avoid schema churn if possible, and include the test/verification plan.
 ```
 
+If you specifically want the native Copilot planning flow, session `plan.md` memory file, or any new Plan-agent-only capabilities, use the built-in `Plan` agent directly for this phase instead of `cc-plan`.
+
 ### Start with `cc-build`
 
 Use this when:
@@ -152,6 +154,7 @@ Good boundary when:
 - Doing research, implementation, and review in one giant session if the task is medium or large
 - Repeating stable repo conventions in every prompt instead of storing them in instructions or overlays
 - Letting prompt files override the custom agent's tool budget unless there is a very specific reason
+- Assuming custom agents automatically inherit a built-in agent's private tool or runtime configuration
 - Delegating “figure this out” instead of giving subagents a narrow, explicit task
 - Using `cc-review` as a disguised implementation agent
 

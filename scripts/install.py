@@ -13,6 +13,7 @@ def build_settings(repo_root: Path) -> dict:
     return {
         "chat.customAgentInSubagent.enabled": True,
         "chat.useAgentSkills": True,
+        "github.copilot.chat.tools.memory.enabled": True,
         "github.copilot.chat.summarizeAgentConversationHistory.enabled": True,
         "chat.includeReferencedInstructions": True,
         "github.copilot.chat.codeGeneration.useInstructionFiles": True,
@@ -49,6 +50,7 @@ def main() -> int:
 
     header = (
         "// Paste these settings into your VS Code settings.json (JSONC is fine).\n"
+        "// This keeps the memory tool on, which matters for context and for the built-in Plan agent's session plan file.\n"
         "// Optional: also enable \"workbench.browser.enableChatTools\" if you want browser-backed verification.\n"
     )
     output = header + rendered + "\n"

@@ -66,6 +66,8 @@ def parse_frontmatter(path: Path) -> dict[str, Any]:
         key, value = line.split(":", 1)
         key = key.strip()
         value = value.strip()
+        if key in data:
+            fail(f"{path} has duplicate frontmatter key {key!r}")
         if value:
             data[key] = parse_scalar(value)
     return data
@@ -102,10 +104,14 @@ def extract_github_aliases(html: str) -> list[str]:
     return primary
 
 
-def collect_used_tools() -> list[str]:
+def collect_used_tools() -> tuple[list[str], list[str]]:
     used: set[str] = set()
+    implicit_all: list[str] = []
     for path in sorted((ROOT / ".github").rglob("*.md")):
         meta = parse_frontmatter(path)
+        if path.name.endswith(".agent.md") and "tools" not in meta:
+            implicit_all.append(path.relative_to(ROOT).as_posix())
+            continue
         value = meta.get("tools")
         if not value:
             continue
@@ -115,7 +121,7 @@ def collect_used_tools() -> list[str]:
             for item in value:
                 if isinstance(item, str):
                     used.add(item)
-    return sorted(used)
+    return sorted(used), implicit_all
 
 
 def main() -> int:
@@ -127,7 +133,7 @@ def main() -> int:
 
     current_vs_code = extract_vs_code_top_level_tools(vs_code_html)
     current_aliases = extract_github_aliases(github_html)
-    used_tools = collect_used_tools()
+    used_tools, implicit_all = collect_used_tools()
 
     unaccounted_top_level = [tool for tool in current_vs_code if tool not in accounted]
     if unaccounted_top_level:
@@ -168,9 +174,18 @@ def main() -> int:
     print("Tools used by this pack:")
     print(", ".join(used_tools))
     print()
-    print("Top-level tools currently used by this pack:")
+    if implicit_all:
+        print("Files with implicit all-tools access:")
+        for item in implicit_all:
+            print(f"- {item}")
+        print()
+    print("Top-level tools currently pinned explicitly by this pack:")
     print(", ".join(used_top_level))
     print()
+    if implicit_all:
+        print("Top-level tools reachable through implicit-all agents:")
+        print(", ".join(current_vs_code))
+        print()
     print("Accounted but currently omitted top-level tools:")
     for tool in omitted:
         print(f"- {tool}: {accounted[tool]}")
