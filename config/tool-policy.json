@@ -1,0 +1,15 @@
+{
+  "accountedVsCodeTopLevelTools": {
+    "agent": "Used by the pack for subagent delegation and handoffs.",
+    "browser": "Used opportunistically for browser-backed verification when available.",
+    "edit": "Used by implementation agents only.",
+    "execute": "Used for targeted validation and project-native commands.",
+    "newWorkspace": "Intentionally omitted. This pack improves existing-repo workflows rather than project scaffolding.",
+    "read": "Used by all read-heavy agents.",
+    "search": "Used heavily for codebase discovery and focused context gathering.",
+    "selection": "Intentionally omitted. This is primarily a user-attached context primitive rather than a persistent tool budget choice for custom agents.",
+    "todos": "Intentionally omitted from most agents to avoid extra state noise; the pack relies on phase-based workflows instead.",
+    "vscode": "Intentionally omitted. The pack stays repo-focused and avoids broad IDE mutation or extension-management behavior by default.",
+    "web": "Used for documentation lookup and external verification."
+  }
+}

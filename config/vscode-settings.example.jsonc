@@ -1,0 +1,33 @@
+{
+  // Required for this pack's hidden custom subagents.
+  "chat.customAgentInSubagent.enabled": true,
+
+  // Required for the skill layer.
+  "chat.useAgentSkills": true,
+
+  // Keep long-running agent conversations from growing without bound.
+  "github.copilot.chat.summarizeAgentConversationHistory.enabled": true,
+
+  // Recommended so linked instruction files are included automatically.
+  "chat.includeReferencedInstructions": true,
+
+  // Keep VS Code's standard always-on instruction behavior enabled for per-repo overlays.
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  "chat.useClaudeMdFile": true,
+
+  // Optional but helpful if you want browser-backed verification.
+  // "workbench.browser.enableChatTools": true,
+
+  "chat.agentFilesLocations": {
+    "C:\\path\\to\\ClaudeCodePilot\\.github\\agents": true
+  },
+  "chat.instructionsFilesLocations": {
+    "C:\\path\\to\\ClaudeCodePilot\\.github\\instructions": true
+  },
+  "chat.promptFilesLocations": {
+    "C:\\path\\to\\ClaudeCodePilot\\.github\\prompts": true
+  },
+  "chat.agentSkillsLocations": {
+    "C:\\path\\to\\ClaudeCodePilot\\.github\\skills": true
+  }
+}
