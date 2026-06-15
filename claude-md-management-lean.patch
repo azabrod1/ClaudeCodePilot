@@ -1,0 +1,1044 @@
+diff --git a/claude-md-management/.claude-plugin/plugin.json b/claude-md-management/.claude-plugin/plugin.json
+new file mode 100644
+index 0000000..871dca4
+--- /dev/null
++++ b/claude-md-management/.claude-plugin/plugin.json
+@@ -0,0 +1,9 @@
++{
++  "name": "claude-md-management",
++  "description": "Tools to maintain and improve CLAUDE.md files - audit quality, capture session learnings, and keep project memory current.",
++  "version": "1.0.0",
++  "author": {
++    "name": "Anthropic",
++    "email": "support@anthropic.com"
++  }
++}
+diff --git a/claude-md-management/LICENSE b/claude-md-management/LICENSE
+new file mode 100644
+index 0000000..d645695
+--- /dev/null
++++ b/claude-md-management/LICENSE
+@@ -0,0 +1,202 @@
++
++                                 Apache License
++                           Version 2.0, January 2004
++                        http://www.apache.org/licenses/
++
++   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
++
++   1. Definitions.
++
++      "License" shall mean the terms and conditions for use, reproduction,
++      and distribution as defined by Sections 1 through 9 of this document.
++
++      "Licensor" shall mean the copyright owner or entity authorized by
++      the copyright owner that is granting the License.
++
++      "Legal Entity" shall mean the union of the acting entity and all
++      other entities that control, are controlled by, or are under common
++      control with that entity. For the purposes of this definition,
++      "control" means (i) the power, direct or indirect, to cause the
++      direction or management of such entity, whether by contract or
++      otherwise, or (ii) ownership of fifty percent (50%) or more of the
++      outstanding shares, or (iii) beneficial ownership of such entity.
++
++      "You" (or "Your") shall mean an individual or Legal Entity
++      exercising permissions granted by this License.
++
++      "Source" form shall mean the preferred form for making modifications,
++      including but not limited to software source code, documentation
++      source, and configuration files.
++
++      "Object" form shall mean any form resulting from mechanical
++      transformation or translation of a Source form, including but
++      not limited to compiled object code, generated documentation,
++      and conversions to other media types.
++
++      "Work" shall mean the work of authorship, whether in Source or
++      Object form, made available under the License, as indicated by a
++      copyright notice that is included in or attached to the work
++      (an example is provided in the Appendix below).
++
++      "Derivative Works" shall mean any work, whether in Source or Object
++      form, that is based on (or derived from) the Work and for which the
++      editorial revisions, annotations, elaborations, or other modifications
++      represent, as a whole, an original work of authorship. For the purposes
++      of this License, Derivative Works shall not include works that remain
++      separable from, or merely link (or bind by name) to the interfaces of,
++      the Work and Derivative Works thereof.
++
++      "Contribution" shall mean any work of authorship, including
++      the original version of the Work and any modifications or additions
++      to that Work or Derivative Works thereof, that is intentionally
++      submitted to Licensor for inclusion in the Work by the copyright owner
++      or by an individual or Legal Entity authorized to submit on behalf of
++      the copyright owner. For the purposes of this definition, "submitted"
++      means any form of electronic, verbal, or written communication sent
++      to the Licensor or its representatives, including but not limited to
++      communication on electronic mailing lists, source code control systems,
++      and issue tracking systems that are managed by, or on behalf of, the
++      Licensor for the purpose of discussing and improving the Work, but
++      excluding communication that is conspicuously marked or otherwise
++      designated in writing by the copyright owner as "Not a Contribution."
++
++      "Contributor" shall mean Licensor and any individual or Legal Entity
++      on behalf of whom a Contribution has been received by Licensor and
++      subsequently incorporated within the Work.
++
++   2. Grant of Copyright License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      copyright license to reproduce, prepare Derivative Works of,
++      publicly display, publicly perform, sublicense, and distribute the
++      Work and such Derivative Works in Source or Object form.
++
++   3. Grant of Patent License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      (except as stated in this section) patent license to make, have made,
++      use, offer to sell, sell, import, and otherwise transfer the Work,
++      where such license applies only to those patent claims licensable
++      by such Contributor that are necessarily infringed by their
++      Contribution(s) alone or by combination of their Contribution(s)
++      with the Work to which such Contribution(s) was submitted. If You
++      institute patent litigation against any entity (including a
++      cross-claim or counterclaim in a lawsuit) alleging that the Work
++      or a Contribution incorporated within the Work constitutes direct
++      or contributory patent infringement, then any patent licenses
++      granted to You under this License for that Work shall terminate
++      as of the date such litigation is filed.
++
++   4. Redistribution. You may reproduce and distribute copies of the
++      Work or Derivative Works thereof in any medium, with or without
++      modifications, and in Source or Object form, provided that You
++      meet the following conditions:
++
++      (a) You must give any other recipients of the Work or
++          Derivative Works a copy of this License; and
++
++      (b) You must cause any modified files to carry prominent notices
++          stating that You changed the files; and
++
++      (c) You must retain, in the Source form of any Derivative Works
++          that You distribute, all copyright, patent, trademark, and
++          attribution notices from the Source form of the Work,
++          excluding those notices that do not pertain to any part of
++          the Derivative Works; and
++
++      (d) If the Work includes a "NOTICE" text file as part of its
++          distribution, then any Derivative Works that You distribute must
++          include a readable copy of the attribution notices contained
++          within such NOTICE file, excluding those notices that do not
++          pertain to any part of the Derivative Works, in at least one
++          of the following places: within a NOTICE text file distributed
++          as part of the Derivative Works; within the Source form or
++          documentation, if provided along with the Derivative Works; or,
++          within a display generated by the Derivative Works, if and
++          wherever such third-party notices normally appear. The contents
++          of the NOTICE file are for informational purposes only and
++          do not modify the License. You may add Your own attribution
++          notices within Derivative Works that You distribute, alongside
++          or as an addendum to the NOTICE text from the Work, provided
++          that such additional attribution notices cannot be construed
++          as modifying the License.
++
++      You may add Your own copyright statement to Your modifications and
++      may provide additional or different license terms and conditions
++      for use, reproduction, or distribution of Your modifications, or
++      for any such Derivative Works as a whole, provided Your use,
++      reproduction, and distribution of the Work otherwise complies with
++      the conditions stated in this License.
++
++   5. Submission of Contributions. Unless You explicitly state otherwise,
++      any Contribution intentionally submitted for inclusion in the Work
++      by You to the Licensor shall be under the terms and conditions of
++      this License, without any additional terms or conditions.
++      Notwithstanding the above, nothing herein shall supersede or modify
++      the terms of any separate license agreement you may have executed
++      with Licensor regarding such Contributions.
++
++   6. Trademarks. This License does not grant permission to use the trade
++      names, trademarks, service marks, or product names of the Licensor,
++      except as required for reasonable and customary use in describing the
++      origin of the Work and reproducing the content of the NOTICE file.
++
++   7. Disclaimer of Warranty. Unless required by applicable law or
++      agreed to in writing, Licensor provides the Work (and each
++      Contributor provides its Contributions) on an "AS IS" BASIS,
++      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
++      implied, including, without limitation, any warranties or conditions
++      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
++      PARTICULAR PURPOSE. You are solely responsible for determining the
++      appropriateness of using or redistributing the Work and assume any
++      risks associated with Your exercise of permissions under this License.
++
++   8. Limitation of Liability. In no event and under no legal theory,
++      whether in tort (including negligence), contract, or otherwise,
++      unless required by applicable law (such as deliberate and grossly
++      negligent acts) or agreed to in writing, shall any Contributor be
++      liable to You for damages, including any direct, indirect, special,
++      incidental, or consequential damages of any character arising as a
++      result of this License or out of the use or inability to use the
++      Work (including but not limited to damages for loss of goodwill,
++      work stoppage, computer failure or malfunction, or any and all
++      other commercial damages or losses), even if such Contributor
++      has been advised of the possibility of such damages.
++
++   9. Accepting Warranty or Additional Liability. While redistributing
++      the Work or Derivative Works thereof, You may choose to offer,
++      and charge a fee for, acceptance of support, warranty, indemnity,
++      or other liability obligations and/or rights consistent with this
++      License. However, in accepting such obligations, You may act only
++      on Your own behalf and on Your sole responsibility, not on behalf
++      of any other Contributor, and only if You agree to indemnify,
++      defend, and hold each Contributor harmless for any liability
++      incurred by, or claims asserted against, such Contributor by reason
++      of your accepting any such warranty or additional liability.
++
++   END OF TERMS AND CONDITIONS
++
++   APPENDIX: How to apply the Apache License to your work.
++
++      To apply the Apache License to your work, attach the following
++      boilerplate notice, with the fields enclosed by brackets "[]"
++      replaced with your own identifying information. (Don't include
++      the brackets!)  The text should be enclosed in the appropriate
++      comment syntax for the file format. We also recommend that a
++      file or class name and description of purpose be included on the
++      same "printed page" as the copyright notice for easier
++      identification within third-party archives.
++
++   Copyright [yyyy] [name of copyright owner]
++
++   Licensed under the Apache License, Version 2.0 (the "License");
++   you may not use this file except in compliance with the License.
++   You may obtain a copy of the License at
++
++       http://www.apache.org/licenses/LICENSE-2.0
++
++   Unless required by applicable law or agreed to in writing, software
++   distributed under the License is distributed on an "AS IS" BASIS,
++   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++   See the License for the specific language governing permissions and
++   limitations under the License.
+diff --git a/claude-md-management/README.md b/claude-md-management/README.md
+new file mode 100644
+index 0000000..4dfaa38
+--- /dev/null
++++ b/claude-md-management/README.md
+@@ -0,0 +1,40 @@
++# CLAUDE.md Management Plugin
++
++Tools to maintain and improve CLAUDE.md files - audit quality, capture session learnings, and keep project memory current.
++
++## What It Does
++
++Two complementary tools for different purposes:
++
++| | claude-md-improver (skill) | /revise-claude-md (command) |
++|---|---|---|
++| **Purpose** | Keep CLAUDE.md aligned with codebase | Capture session learnings |
++| **Triggered by** | Codebase changes | End of session |
++| **Use when** | Periodic maintenance | Session revealed missing context |
++
++## Usage
++
++### Skill: claude-md-improver
++
++Audits CLAUDE.md files against current codebase state:
++
++```
++"audit my CLAUDE.md files"
++"check if my CLAUDE.md is up to date"
++```
++
++<img src="claude-md-improver-example.png" alt="CLAUDE.md improver showing quality scores and recommended updates" width="600">
++
++### Command: /revise-claude-md
++
++Captures learnings from the current session:
++
++```
++/revise-claude-md
++```
++
++<img src="revise-claude-md-example.png" alt="Revise command capturing session learnings into CLAUDE.md" width="600">
++
++## Author
++
++Isabella He (isabella@anthropic.com)
+diff --git a/claude-md-management/commands/revise-claude-md.md b/claude-md-management/commands/revise-claude-md.md
+new file mode 100644
+index 0000000..b7f201d
+--- /dev/null
++++ b/claude-md-management/commands/revise-claude-md.md
+@@ -0,0 +1,54 @@
++---
++description: Update CLAUDE.md with learnings from this session
++allowed-tools: Read, Edit, Glob
++---
++
++Review this session for learnings about working with Claude Code in this codebase. Update CLAUDE.md with context that would help future Claude sessions be more effective.
++
++## Step 1: Reflect
++
++What context was missing that would have helped Claude work more effectively?
++- Bash commands that were used or discovered
++- Code style patterns followed
++- Testing approaches that worked
++- Environment/configuration quirks
++- Warnings or gotchas encountered
++
++## Step 2: Find CLAUDE.md Files
++
++```bash
++find . -name "CLAUDE.md" -o -name ".claude.local.md" 2>/dev/null | head -20
++```
++
++Decide where each addition belongs:
++- `CLAUDE.md` - Team-shared (checked into git)
++- `.claude.local.md` - Personal/local only (gitignored)
++
++## Step 3: Draft Additions
++
++**Keep it concise** - one line per concept. CLAUDE.md is part of the prompt, so brevity matters.
++
++Format: `<command or pattern>` - `<brief description>`
++
++Avoid:
++- Verbose explanations
++- Obvious information
++- One-off fixes unlikely to recur
++
++## Step 4: Show Proposed Changes
++
++For each addition:
++
++```
++### Update: ./CLAUDE.md
++
++**Why:** [one-line reason]
++
++\`\`\`diff
+++ [the addition - keep it brief]
++\`\`\`
++```
++
++## Step 5: Apply with Approval
++
++Ask if the user wants to apply the changes. Only edit files they approve.
+diff --git a/claude-md-management/skills/claude-md-improver/SKILL.md b/claude-md-management/skills/claude-md-improver/SKILL.md
+new file mode 100644
+index 0000000..744444e
+--- /dev/null
++++ b/claude-md-management/skills/claude-md-improver/SKILL.md
+@@ -0,0 +1,179 @@
++---
++name: claude-md-improver
++description: Audit and improve CLAUDE.md files in repositories. Use when user asks to check, audit, update, improve, or fix CLAUDE.md files. Scans for all CLAUDE.md files, evaluates quality against templates, outputs quality report, then makes targeted updates. Also use when the user mentions "CLAUDE.md maintenance" or "project memory optimization".
++tools: Read, Glob, Grep, Bash, Edit
++---
++
++# CLAUDE.md Improver
++
++Audit, evaluate, and improve CLAUDE.md files across a codebase to ensure Claude Code has optimal project context.
++
++**This skill can write to CLAUDE.md files.** After presenting a quality report and getting user approval, it updates CLAUDE.md files with targeted improvements.
++
++## Workflow
++
++### Phase 1: Discovery
++
++Find all CLAUDE.md files in the repository:
++
++```bash
++find . -name "CLAUDE.md" -o -name ".claude.md" -o -name ".claude.local.md" 2>/dev/null | head -50
++```
++
++**File Types & Locations:**
++
++| Type | Location | Purpose |
++|------|----------|---------|
++| Project root | `./CLAUDE.md` | Primary project context (checked into git, shared with team) |
++| Local overrides | `./.claude.local.md` | Personal/local settings (gitignored, not shared) |
++| Global defaults | `~/.claude/CLAUDE.md` | User-wide defaults across all projects |
++| Package-specific | `./packages/*/CLAUDE.md` | Module-level context in monorepos |
++| Subdirectory | Any nested location | Feature/domain-specific context |
++
++**Note:** Claude auto-discovers CLAUDE.md files in parent directories, making monorepo setups work automatically.
++
++### Phase 2: Quality Assessment
++
++For each CLAUDE.md file, evaluate against quality criteria. See [references/quality-criteria.md](references/quality-criteria.md) for detailed rubrics.
++
++**Quick Assessment Checklist:**
++
++| Criterion | Weight | Check |
++|-----------|--------|-------|
++| Commands/workflows documented | High | Are build/test/deploy commands present? |
++| Architecture clarity | High | Can Claude understand the codebase structure? |
++| Non-obvious patterns | Medium | Are gotchas and quirks documented? |
++| Conciseness | Medium | No verbose explanations or obvious info? |
++| Currency | High | Does it reflect current codebase state? |
++| Actionability | High | Are instructions executable, not vague? |
++
++**Quality Scores:**
++- **A (90-100)**: Comprehensive, current, actionable
++- **B (70-89)**: Good coverage, minor gaps
++- **C (50-69)**: Basic info, missing key sections
++- **D (30-49)**: Sparse or outdated
++- **F (0-29)**: Missing or severely outdated
++
++### Phase 3: Quality Report Output
++
++**ALWAYS output the quality report BEFORE making any updates.**
++
++Format:
++
++```
++## CLAUDE.md Quality Report
++
++### Summary
++- Files found: X
++- Average score: X/100
++- Files needing update: X
++
++### File-by-File Assessment
++
++#### 1. ./CLAUDE.md (Project Root)
++**Score: XX/100 (Grade: X)**
++
++| Criterion | Score | Notes |
++|-----------|-------|-------|
++| Commands/workflows | X/20 | ... |
++| Architecture clarity | X/20 | ... |
++| Non-obvious patterns | X/15 | ... |
++| Conciseness | X/15 | ... |
++| Currency | X/15 | ... |
++| Actionability | X/15 | ... |
++
++**Issues:**
++- [List specific problems]
++
++**Recommended additions:**
++- [List what should be added]
++
++#### 2. ./packages/api/CLAUDE.md (Package-specific)
++...
++```
++
++### Phase 4: Targeted Updates
++
++After outputting the quality report, ask user for confirmation before updating.
++
++**Update Guidelines (Critical):**
++
++1. **Propose targeted additions only** - Focus on genuinely useful info:
++   - Commands or workflows discovered during analysis
++   - Gotchas or non-obvious patterns found in code
++   - Package relationships that weren't clear
++   - Testing approaches that work
++   - Configuration quirks
++
++2. **Keep it minimal** - Avoid:
++   - Restating what's obvious from the code
++   - Generic best practices already covered
++   - One-off fixes unlikely to recur
++   - Verbose explanations when a one-liner suffices
++
++3. **Show diffs** - For each change, show:
++   - Which CLAUDE.md file to update
++   - The specific addition (as a diff or quoted block)
++   - Brief explanation of why this helps future sessions
++
++**Diff Format:**
++
++```markdown
++### Update: ./CLAUDE.md
++
++**Why:** Build command was missing, causing confusion about how to run the project.
++
++```diff
+++ ## Quick Start
+++
+++ ```bash
+++ npm install
+++ npm run dev  # Start development server on port 3000
+++ ```
++```
++```
++
++### Phase 5: Apply Updates
++
++After user approval, apply changes using the Edit tool. Preserve existing content structure.
++
++## Templates
++
++See [references/templates.md](references/templates.md) for CLAUDE.md templates by project type.
++
++## Common Issues to Flag
++
++1. **Stale commands**: Build commands that no longer work
++2. **Missing dependencies**: Required tools not mentioned
++3. **Outdated architecture**: File structure that's changed
++4. **Missing environment setup**: Required env vars or config
++5. **Broken test commands**: Test scripts that have changed
++6. **Undocumented gotchas**: Non-obvious patterns not captured
++
++## User Tips to Share
++
++When presenting recommendations, remind users:
++
++- **`#` key shortcut**: During a Claude session, press `#` to have Claude auto-incorporate learnings into CLAUDE.md
++- **Keep it concise**: CLAUDE.md should be human-readable; dense is better than verbose
++- **Actionable commands**: All documented commands should be copy-paste ready
++- **Use `.claude.local.md`**: For personal preferences not shared with team (add to `.gitignore`)
++- **Global defaults**: Put user-wide preferences in `~/.claude/CLAUDE.md`
++
++## What Makes a Great CLAUDE.md
++
++**Key principles:**
++- Concise and human-readable
++- Actionable commands that can be copy-pasted
++- Project-specific patterns, not generic advice
++- Non-obvious gotchas and warnings
++
++**Recommended sections** (use only what's relevant):
++- Commands (build, test, dev, lint)
++- Architecture (directory structure)
++- Key Files (entry points, config)
++- Code Style (project conventions)
++- Environment (required vars, setup)
++- Testing (commands, patterns)
++- Gotchas (quirks, common mistakes)
++- Workflow (when to do what)
+diff --git a/claude-md-management/skills/claude-md-improver/references/quality-criteria.md b/claude-md-management/skills/claude-md-improver/references/quality-criteria.md
+new file mode 100644
+index 0000000..0853bb0
+--- /dev/null
++++ b/claude-md-management/skills/claude-md-improver/references/quality-criteria.md
+@@ -0,0 +1,109 @@
++# CLAUDE.md Quality Criteria
++
++## Scoring Rubric
++
++### 1. Commands/Workflows (20 points)
++
++**20 points**: All essential commands documented with context
++- Build, test, lint, deploy commands present
++- Development workflow clear
++- Common operations documented
++
++**15 points**: Most commands present, some missing context
++
++**10 points**: Basic commands only, no workflow
++
++**5 points**: Few commands, many missing
++
++**0 points**: No commands documented
++
++### 2. Architecture Clarity (20 points)
++
++**20 points**: Clear codebase map
++- Key directories explained
++- Module relationships documented
++- Entry points identified
++- Data flow described where relevant
++
++**15 points**: Good structure overview, minor gaps
++
++**10 points**: Basic directory listing only
++
++**5 points**: Vague or incomplete
++
++**0 points**: No architecture info
++
++### 3. Non-Obvious Patterns (15 points)
++
++**15 points**: Gotchas and quirks captured
++- Known issues documented
++- Workarounds explained
++- Edge cases noted
++- "Why we do it this way" for unusual patterns
++
++**10 points**: Some patterns documented
++
++**5 points**: Minimal pattern documentation
++
++**0 points**: No patterns or gotchas
++
++### 4. Conciseness (15 points)
++
++**15 points**: Dense, valuable content
++- No filler or obvious info
++- Each line adds value
++- No redundancy with code comments
++
++**10 points**: Mostly concise, some padding
++
++**5 points**: Verbose in places
++
++**0 points**: Mostly filler or restates obvious code
++
++### 5. Currency (15 points)
++
++**15 points**: Reflects current codebase
++- Commands work as documented
++- File references accurate
++- Tech stack current
++
++**10 points**: Mostly current, minor staleness
++
++**5 points**: Several outdated references
++
++**0 points**: Severely outdated
++
++### 6. Actionability (15 points)
++
++**15 points**: Instructions are executable
++- Commands can be copy-pasted
++- Steps are concrete
++- Paths are real
++
++**10 points**: Mostly actionable
++
++**5 points**: Some vague instructions
++
++**0 points**: Vague or theoretical
++
++## Assessment Process
++
++1. Read the CLAUDE.md file completely
++2. Cross-reference with actual codebase:
++   - Run documented commands (mentally or actually)
++   - Check if referenced files exist
++   - Verify architecture descriptions
++3. Score each criterion
++4. Calculate total and assign grade
++5. List specific issues found
++6. Propose concrete improvements
++
++## Red Flags
++
++- Commands that would fail (wrong paths, missing deps)
++- References to deleted files/folders
++- Outdated tech versions
++- Copy-paste from templates without customization
++- Generic advice not specific to the project
++- "TODO" items never completed
++- Duplicate info across multiple CLAUDE.md files
+diff --git a/claude-md-management/skills/claude-md-improver/references/templates.md b/claude-md-management/skills/claude-md-improver/references/templates.md
+new file mode 100644
+index 0000000..35e6139
+--- /dev/null
++++ b/claude-md-management/skills/claude-md-improver/references/templates.md
+@@ -0,0 +1,253 @@
++# CLAUDE.md Templates
++
++## Key Principles
++
++- **Concise**: Dense, human-readable content; one line per concept when possible
++- **Actionable**: Commands should be copy-paste ready
++- **Project-specific**: Document patterns unique to this project, not generic advice
++- **Current**: All info should reflect actual codebase state
++
++---
++
++## Recommended Sections
++
++Use only the sections relevant to the project. Not all sections are needed.
++
++### Commands
++
++Document the essential commands for working with the project.
++
++```markdown
++## Commands
++
++| Command | Description |
++|---------|-------------|
++| `<install command>` | Install dependencies |
++| `<dev command>` | Start development server |
++| `<build command>` | Production build |
++| `<test command>` | Run tests |
++| `<lint command>` | Lint/format code |
++```
++
++### Architecture
++
++Describe the project structure so Claude understands where things live.
++
++```markdown
++## Architecture
++
++```
++<root>/
++  <dir>/    # <purpose>
++  <dir>/    # <purpose>
++  <dir>/    # <purpose>
++```
++```
++
++### Key Files
++
++List important files that Claude should know about.
++
++```markdown
++## Key Files
++
++- `<path>` - <purpose>
++- `<path>` - <purpose>
++```
++
++### Code Style
++
++Document project-specific coding conventions.
++
++```markdown
++## Code Style
++
++- <convention>
++- <convention>
++- <preference over alternative>
++```
++
++### Environment
++
++Document required environment variables and setup.
++
++```markdown
++## Environment
++
++Required:
++- `<VAR_NAME>` - <purpose>
++- `<VAR_NAME>` - <purpose>
++
++Setup:
++- <setup step>
++```
++
++### Testing
++
++Document testing approach and commands.
++
++```markdown
++## Testing
++
++- `<test command>` - <what it tests>
++- <testing convention or pattern>
++```
++
++### Gotchas
++
++Document non-obvious patterns, quirks, and warnings.
++
++```markdown
++## Gotchas
++
++- <non-obvious thing that causes issues>
++- <ordering dependency or prerequisite>
++- <common mistake to avoid>
++```
++
++### Workflow
++
++Document development workflow patterns.
++
++```markdown
++## Workflow
++
++- <when to do X>
++- <preferred approach for Y>
++```
++
++---
++
++## Template: Project Root (Minimal)
++
++```markdown
++# <Project Name>
++
++<One-line description>
++
++## Commands
++
++| Command | Description |
++|---------|-------------|
++| `<command>` | <description> |
++
++## Architecture
++
++```
++<structure>
++```
++
++## Gotchas
++
++- <gotcha>
++```
++
++---
++
++## Template: Project Root (Comprehensive)
++
++```markdown
++# <Project Name>
++
++<One-line description>
++
++## Commands
++
++| Command | Description |
++|---------|-------------|
++| `<command>` | <description> |
++
++## Architecture
++
++```
++<structure with descriptions>
++```
++
++## Key Files
++
++- `<path>` - <purpose>
++
++## Code Style
++
++- <convention>
++
++## Environment
++
++- `<VAR>` - <purpose>
++
++## Testing
++
++- `<command>` - <scope>
++
++## Gotchas
++
++- <gotcha>
++```
++
++---
++
++## Template: Package/Module
++
++For packages within a monorepo or distinct modules.
++
++```markdown
++# <Package Name>
++
++<Purpose of this package>
++
++## Usage
++
++```
++<import/usage example>
++```
++
++## Key Exports
++
++- `<export>` - <purpose>
++
++## Dependencies
++
++- `<dependency>` - <why needed>
++
++## Notes
++
++- <important note>
++```
++
++---
++
++## Template: Monorepo Root
++
++```markdown
++# <Monorepo Name>
++
++<Description>
++
++## Packages
++
++| Package | Description | Path |
++|---------|-------------|------|
++| `<name>` | <purpose> | `<path>` |
++
++## Commands
++
++| Command | Description |
++|---------|-------------|
++| `<command>` | <description> |
++
++## Cross-Package Patterns
++
++- <shared pattern>
++- <generation/sync pattern>
++```
++
++---
++
++## Update Principles
++
++When updating any CLAUDE.md:
++
++1. **Be specific**: Use actual file paths, real commands from this project
++2. **Be current**: Verify info against the actual codebase
++3. **Be brief**: One line per concept when possible
++4. **Be useful**: Would this help a new Claude session understand the project?
+diff --git a/claude-md-management/skills/claude-md-improver/references/update-guidelines.md b/claude-md-management/skills/claude-md-improver/references/update-guidelines.md
+new file mode 100644
+index 0000000..04e7f8e
+--- /dev/null
++++ b/claude-md-management/skills/claude-md-improver/references/update-guidelines.md
+@@ -0,0 +1,150 @@
++# CLAUDE.md Update Guidelines
++
++## Core Principle
++
++Only add information that will genuinely help future Claude sessions. The context window is precious - every line must earn its place.
++
++## What TO Add
++
++### 1. Commands/Workflows Discovered
++
++```markdown
++## Build
++
++`npm run build:prod` - Full production build with optimization
++`npm run build:dev` - Fast dev build (no minification)
++```
++
++Why: Saves future sessions from discovering these again.
++
++### 2. Gotchas and Non-Obvious Patterns
++
++```markdown
++## Gotchas
++
++- Tests must run sequentially (`--runInBand`) due to shared DB state
++- `yarn.lock` is authoritative; delete `node_modules` if deps mismatch
++```
++
++Why: Prevents repeating debugging sessions.
++
++### 3. Package Relationships
++
++```markdown
++## Dependencies
++
++The `auth` module depends on `crypto` being initialized first.
++Import order matters in `src/bootstrap.ts`.
++```
++
++Why: Architecture knowledge that isn't obvious from code.
++
++### 4. Testing Approaches That Worked
++
++```markdown
++## Testing
++
++For API endpoints: Use `supertest` with the test helper in `tests/setup.ts`
++Mocking: Factory functions in `tests/factories/` (not inline mocks)
++```
++
++Why: Establishes patterns that work.
++
++### 5. Configuration Quirks
++
++```markdown
++## Config
++
++- `NEXT_PUBLIC_*` vars must be set at build time, not runtime
++- Redis connection requires `?family=0` suffix for IPv6
++```
++
++Why: Environment-specific knowledge.
++
++## What NOT to Add
++
++### 1. Obvious Code Info
++
++Bad:
++```markdown
++The `UserService` class handles user operations.
++```
++
++The class name already tells us this.
++
++### 2. Generic Best Practices
++
++Bad:
++```markdown
++Always write tests for new features.
++Use meaningful variable names.
++```
++
++This is universal advice, not project-specific.
++
++### 3. One-Off Fixes
++
++Bad:
++```markdown
++We fixed a bug in commit abc123 where the login button didn't work.
++```
++
++Won't recur; clutters the file.
++
++### 4. Verbose Explanations
++
++Bad:
++```markdown
++The authentication system uses JWT tokens. JWT (JSON Web Tokens) are
++an open standard (RFC 7519) that defines a compact and self-contained
++way for securely transmitting information between parties as a JSON
++object. In our implementation, we use the HS256 algorithm which...
++```
++
++Good:
++```markdown
++Auth: JWT with HS256, tokens in `Authorization: Bearer <token>` header.
++```
++
++## Diff Format for Updates
++
++For each suggested change:
++
++### 1. Identify the File
++
++```
++File: ./CLAUDE.md
++Section: Commands (new section after ## Architecture)
++```
++
++### 2. Show the Change
++
++```diff
++ ## Architecture
++ ...
++
+++## Commands
+++
+++| Command | Purpose |
+++|---------|---------|
+++| `npm run dev` | Dev server with HMR |
+++| `npm run build` | Production build |
+++| `npm test` | Run test suite |
++```
++
++### 3. Explain Why
++
++> **Why this helps:** The build commands weren't documented, causing
++> confusion about how to run the project. This saves future sessions
++> from needing to inspect `package.json`.
++
++## Validation Checklist
++
++Before finalizing an update, verify:
++
++- [ ] Each addition is project-specific
++- [ ] No generic advice or obvious info
++- [ ] Commands are tested and work
++- [ ] File paths are accurate
++- [ ] Would a new Claude session find this helpful?
++- [ ] Is this the most concise way to express the info?
